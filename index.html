@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Buram Srisai Rishika Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  :root {
+    --primary: #2d3142;
+    --secondary: #e0e1dd;
+    --accent: #ef8354;
+    --white: #fff;
+    --shadow: 0 4px 24px rgba(45,49,66,0.10);
+  }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(120deg, var(--secondary), var(--white));
+    color: var(--primary);
+    min-height: 100vh;
+  }
+  header {
+    background: var(--primary);
+    color: var(--white);
+    padding: 2rem 1rem 1rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: fadeInDown 1s;
+  }
+  header h1 {
+    margin: 0 0 .5rem 0;
+    font-size: 2.7rem;
+    letter-spacing: 2px;
+    animation: fadeIn 1.5s;
+  }
+  header p {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .email-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.6em 1.4em;
+    margin: 1.5rem auto 0 auto;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 2em;
+    box-shadow: 0 2px 8px rgba(239,131,84,0.1);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
+    animation: fadeIn 1.3s;
+  }
+  .email-btn:hover {
+    background: #d45b18;
+    transform: translateY(-2px) scale(1.04);
+  }
+  /* Tabs Navigation */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    background: #f4f4f6;
+    border-radius: 2em;
+    margin: 1.4em auto 2em auto;
+    max-width: 800px;
+    padding: 4px;
+    box-shadow: var(--shadow);
+  }
+  .nav-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    font-size: 1.1em;
+    padding: .7em 1.7em;
+    border-radius: 2em;
+    color: var(--primary);
+    cursor: pointer;
+    font-weight: 500;
+    transition: background .22s, color .22s;
+  }
+  .nav-tab.active {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 1px 8px #ffc2;
+  }
+  .portfolio-section {
+    display: none;
+    max-width: 900px;
+    margin: auto;
+    background: var(--white);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    animation: fadeInUp .7s;
+  }
+  .portfolio-section.active {
+    display: block;
+  }
+  h2 {
+    margin: 0 0 1rem 0;
+    color: var(--accent);
+    letter-spacing: 1px;
+    font-size: 1.4rem;
+    position: relative;
+  }
+  h2:after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background: var(--accent);
+    display: block;
+    margin-top: 5px;
+    border-radius: 2px;
+  }
+  .info-row { margin: .25rem 0; }
+  .label {
+    font-weight: bold;
+    color: var(--accent);
+    margin-right: 6px;
+  }
+  /* About section */
+  .education {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 18px;
+  }
+  .edu-item {
+    flex: 1;
+    min-width: 220px;
+    margin-bottom: 8px;
+  }
+  /* Skills section - animated bars */
+  .skill-list {
+    margin-top: 1.3em;
+  }
+  .skill-row {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .skill-name {
+    width: 100px;
+    min-width: 80px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .skill-bar-bg {
+    position: relative;
+    flex: 1;
+    background: #e0e1dd;
+    border-radius: 8px;
+    height: 22px;
+    overflow: hidden;
+    box-shadow: 0 1px 8px #eee7;
+  }
+  .skill-bar {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #ffcaa8);
+    border-radius: 8px;
+    width: 0;
+    transition: width 1.3s cubic-bezier(.4,0,.2,1);
+  }
+  .skill-perc {
+    margin-left: 12px;
+    min-width: 32px;
+    font-family: monospace;
+    color: #7b5899;
+    font-size: 1rem;
+  }
+  /* Project tabs */
+  .tabs {
+    border-radius: 8px;
+    background: #f3f3f5;
+    display: flex;
+    gap: 1px;
+    margin-bottom: 1.3rem;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 0.8em 1.2em;
+    background: #e0e1dd;
+    color: var(--primary);
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1.04em;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+  }
+  .tab-btn.active {
+    background: var(--accent);
+    color: var(--white);
+  }
+  .tab-content {
+    display: none;
+    animation: fadeIn .8s;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  .proj-title {
+    color: var(--primary);
+    font-size: 1.13rem;
+    font-weight: bold;
+    letter-spacing: .5px;
+    margin-top: 0;
+  }
+  .proj-desc {
+    margin: .45rem 0 1.15rem 0;
+    line-height: 1.45;
+    opacity: .97;
+  }
+  /* Certifications / Courses list */
+  .certs, .courses {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: .7em;
+  }
+  .cert-item, .course-item {
+    background: #faf0e6;
+    padding: 10px 18px;
+    border-radius: 7px;
+    border-left: 4px solid var(--accent);
+    color: #392b11;
+    font-size: 1.07em;
+    margin-bottom: 0;
+  }
+  /* Internship and Activities */
+  .internship-list, .participation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 1em;
+  }
+  .internship-card {
+    border-radius: 8px;
+    background: #eaf3ea;
+    padding: 14px 20px;
+    box-shadow: 0 1px 8px #afdbaa26;
+    color: #1d4d1d;
+    border-left: 4px solid #21a53a;
+  }
+  .intern-title {
+    font-weight: bold;
+    color: #10862a;
+    letter-spacing: .3px;
+    font-size: 1.09em;
+    margin-bottom: .25em;
+  }
+  /* Responsive */
+  @media (max-width: 700px) {
+    .portfolio-section { padding: 1em; }
+    .education { flex-direction: column; }
+    .skill-row, .tab-btn, .nav-tab { font-size: 0.98em; }
+    .skill-name { width: 70px;}
+    .cert-item, .course-item { font-size: 0.95em;}
+    .intern-title { font-size: 1em;}
+  }
+  /* Animations */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px);}
+    to   { opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Buram Srisai Rishika</h1>
+    <p>Hyderabad, Telangana &mdash; <a class="email-btn" href="mailto:rishikaburam25@gmaiI.com">Email Me</a></p>
+  </header>
+
+  <div class="nav-tabs" id="mainTabs">
+    <button class="nav-tab active" onclick="showMainTab(0)">About</button>
+    <button class="nav-tab" onclick="showMainTab(1)">Skills</button>
+    <button class="nav-tab" onclick="showMainTab(2)">Projects</button>
+    <button class="nav-tab" onclick="showMainTab(3)">Certifications</button>
+  </div>
+
+  <!-- About Section -->
+  <div class="portfolio-section active">
+    <h2>About Me</h2>
+    <p>
+      Motivated and detail-oriented B.Tech student in Information Technology. Passionate about full-stack development and AI-integrated applications. Eager to contribute technical and problem-solving skills in real-world projects and explore innovative solutions in the field of software development.
+    </p>
+    <h2>Education</h2>
+    <div class="education">
+      <div class="edu-item">
+        <span class="label">B.Tech - Information Technology</span> <br>
+        Vignan Institute of Technology <br>
+        <span class="info-row">2023 &mdash; Present</span> <br>
+        <span class="info-row"><span class="label">CGPA:</span> 9.3</span>
+      </div>
+      <div class="edu-item">
+        <span class="label">Intermediate - MPC</span> <br>
+        Narayana Junior College, Telangana <br>
+        <span class="info-row">Percentage: 98.9%</span>
+      </div>
+      <div class="edu-item">
+        <span class="label">SSC - 10th Grade</span> <br>
+        Loyola Model High School, Telangana <br>
+        <span class="info-row"><span class="label">CGPA:</span> 10.0</span>
+      </div>
+    </div>
+    <h2 style="margin-top:2em;">Internships</h2>
+    <div class="internship-list">
+      <div class="internship-card">
+        <span class="intern-title">1M1B Green Internship – Completion</span>
+        <div>
+          <b>Duration:</b> 5–8 weeks (60+ hours) <br>
+          <b>Issued by:</b> 1M1B Green Skills Academy, AICTE & Salesforce<br>
+          <b>Description:</b> A prestigious nation-wide program focused on <b>green skills and climate action</b>. Completed a hands-on, live project on campus for sustainability, learning industry-grade data tools and practices for eco-friendly transformation. Earned official <b>Completion Certificate</b> and academic credits for active engagement, collaboration with industry mentors, and leadership in green projects.<br>
+        </div>
+      </div>
+    </div>
+    <h2 style="margin-top:2em;">Activities & Meetups</h2>
+    <div class="participation-list">
+      <div class="cert-item"><span class="label">Meetups:</span> Microsoft - AI and Data Feast, Tech Mahindra</div>
+      <div class="cert-item"><span class="label">Participation:</span> SIH Hackathon 2024, Generative AI Workshop - Nextwave</div>
+    </div>
+  </div>
+
+  <!-- Skills Section -->
+  <div class="portfolio-section">
+    <h2>Technical Skills</h2>
+    <div class="skill-list">
+      <div class="skill-row">
+        <span class="skill-name">C</span>
+        <div class="skill-bar-bg"><div class="skill-bar" data-width="85%"></div></div>
+        <span class="skill-perc">85%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Python</span>
+        <div class="skill-bar-bg"><div class="skill-bar" data-width="92%"></div></div>
+        <span class="skill-perc">92%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Java</span>
+        <div class="skill-bar-bg"><div class="skill-bar" data-width="80%"></div></div>
+        <span class="skill-perc">80%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">HTML/CSS</span>
+        <div class="skill-bar-bg"><div class="skill-bar" data-width="94%"></div></div>
+        <span class="skill-perc">94%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">ReactJS</span>
+        <div class="skill-bar-bg"><div class="skill-bar" data-width="75%"></div></div>
+        <span class="skill-perc">75%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Flask</span>
+        <div class="skill-bar-bg"><div class="skill-bar" data-width="70%"></div></div>
+        <span class="skill-perc">70%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects Section -->
+  <div class="portfolio-section">
+    <h2>Projects</h2>
+    <div class="tabs" id="projTabs">
+      <button class="tab-btn active" onclick="showProjTab(0)">Major Projects</button>
+      <button class="tab-btn" onclick="showProjTab(1)">Basic Projects</button>
+    </div>
+    <div class="tab-content active">
+      <div class="proj-title">FitLife - Fitness and Health Platform</div>
+      <div class="proj-desc">
+        Comprehensive web platform to monitor workouts, meals, hydration, and mood, offering personalized AI-driven plans. Features habit formation, emotional wellness tools, and seamless user experience.<br>
+        <span class="label">Tech Stack:</span> HTML, CSS, JavaScript, ReactJS, Flask
+      </div>
+      <div class="proj-title">Bank Management System using Python</div>
+      <div class="proj-desc">
+        A terminal-based banking system supporting account creation, money transactions, and simple customer logs.<br>
+        <span class="label">Tech Stack:</span> Python
+      </div>
+    </div>
+    <div class="tab-content">
+      <div class="proj-title">Student Grade Calculator</div>
+      <div class="proj-desc">
+        Web app for calculating grade averages, supporting multiple gradings and subjects for students.<br>
+        <span class="label">Tech Stack:</span> HTML, CSS, JavaScript
+      </div>
+      <div class="proj-title">To-Do List Web App</div>
+      <div class="proj-desc">
+        User-friendly to-do application with add, complete, and remove functionalities for productivity.<br>
+        <span class="label">Tech Stack:</span> HTML, CSS, JavaScript
+      </div>
+    </div>
+  </div>
+
+  <!-- Certifications Section -->
+  <div class="portfolio-section">
+    <h2>Courses Completed</h2>
+    <div class="courses">
+      <div class="course-item">Python for Beginners – Great Learning</div>
+      <div class="course-item">Introduction to Python – Infosys Springboard</div>
+      <div class="course-item">Practical HTML and CSS – Infosys Springboard</div>
+      <div class="course-item">Java Essentials – Infosys Springboard</div>
+      <div class="course-item">Java for Beginners – Infosys Springboard</div>
+      <div class="course-item">Frontend with HTML5 &amp; CSS3 – TASK</div>
+      <div class="course-item">HTML and CSS Bootcamp – LetsUpgrade</div>
+      <div class="course-item">Node.js Bootcamp – LetsUpgrade</div>
+      <div class="course-item">MySQL Bootcamp – LetsUpgrade</div>
+      <div class="course-item">SQL Case Study – Infosys Springboard</div>
+      <div class="course-item">Introduction to Artificial Intelligence – 360DigiTMG &amp; TASK</div>
+      <div class="course-item">Introduction to Data Science – Cisco Networking Academy</div>
+      <div class="course-item">AI Skills Passport – Microsoft &amp; EY</div>
+    </div>
+    <h2 style="margin-top:2em;">Certifications</h2>
+    <div class="certs">
+      <div class="cert-item">Infosys Springboard: Front End with HTML &amp; CSS</div>
+      <div class="cert-item">Infosys Springboard: Java and Python</div>
+    </div>
+  </div>
+
+  <script>
+    // Main tab navigation
+    function showMainTab(idx) {
+      var tabs = document.querySelectorAll('.nav-tab');
+      var sections = document.querySelectorAll('.portfolio-section');
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i===idx);
+        sections[i].classList.toggle('active', i===idx);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Skills animation
+    window.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.skill-bar').forEach(function(bar) {
+        setTimeout(function() {
+          bar.style.width = bar.getAttribute('data-width');
+        }, 350);
+      });
+    });
+
+    // Projects tab inside Projects section
+    function showProjTab(idx) {
+      let tabs = document.querySelectorAll('#projTabs .tab-btn');
+      let tabContents = document.querySelectorAll('.portfolio-section:nth-of-type(3) .tab-content');
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === idx);
+        tabContents[i].classList.toggle('active', i === idx);
+      });
+    }
+  </script>
+</body>
+</html>
